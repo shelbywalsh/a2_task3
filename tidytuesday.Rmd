@@ -1,0 +1,30 @@
+---
+title: "a2_task3"
+author: "Shelby Walsh"
+date: "2/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+
+tuesdata <- tidytuesdayR::tt_load('2021-01-26')
+
+plastics <- tuesdata$plastics
+```
+
+# looking at data
+```{r}
+country_plastics <- plastics %>% 
+  select(country, parent_company, grand_total) %>% 
+  group_by(country) %>% 
+  filter(parent_company == "Grand Total")
+
+ggplot(data = country_plastics, aes(x = country, y = grand_total)) +
+  geom_point()
+```
+
